@@ -170,7 +170,7 @@
         });
 
         function refreshData() {
-            fetch('http://localhost:5007/api/realestate', {
+            fetch('https://homescout-cm2n.onrender.com/api/realestate', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
@@ -183,7 +183,7 @@
                         const { _id, title, price, description, location, image, bedrooms, bathrooms, propertyType } = element;
                         const propertyHTML = `
                         <div id="${_id}" class="property">
-                            <img src="http://localhost:5007/uploads/property/${image}" alt="${title}">
+                            <img src="https://homescout-cm2n.onrender.com/uploads/property/${image}" alt="${title}">
                             <h3>${title}</h3>
                             <p>Price: $${price}</p>
                             <p>${description}</p>
@@ -225,7 +225,7 @@
                 formData.append('image', imageFile);
             }
 
-            fetch('http://localhost:5007/api/realestate', {
+            fetch('https://homescout-cm2n.onrender.com/api/realestate', {
                 method: 'POST',
                 body: formData
             })
@@ -239,7 +239,7 @@
         }
 
         function deleteProperty(id) {
-            fetch(`http://localhost:5007/api/realestate/${id}`, {
+            fetch(`https://homescout-cm2n.onrender.com/api/realestate/${id}`, {
                 method: 'DELETE',
             })
                 .then(() => refreshData())
@@ -247,7 +247,7 @@
         }
 
         function editProperty(id) {
-            fetch(`http://localhost:5007/api/realestate/${id}`, {
+            fetch(`https://homescout-cm2n.onrender.com/api/realestate/${id}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
@@ -265,7 +265,7 @@
                     document.getElementById('propertyType').value = propertyType;
 
                     if (image) {
-                        document.getElementById('imagePreview').src = `http://localhost:5007/uploads/property/${image}`;
+                        document.getElementById('imagePreview').src = `https://homescout-cm2n.onrender.com/uploads/property/${image}`;
                         document.getElementById('imagePreview').style.display = 'block';
                     } else {
                         document.getElementById('imagePreview').style.display = 'none';

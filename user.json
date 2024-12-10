@@ -1,0 +1,20 @@
+[
+  {
+    "name": "John Doe",
+    "phone": "1234567890",
+    "email": "johndoe@example.com",
+    "password": "password123"
+  },
+  {
+    "name": "Navya Sharma",
+    "phone": "08264878000",
+    "email": "johndoe@exae.com",
+    "password": "1234567"
+  },
+  {
+    "name": "Navya Sharma",
+    "phone": "08264878000",
+    "email": "johndoe@exe.com",
+    "password": "12345678"
+  }
+]

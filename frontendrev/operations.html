@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 0 auto;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="file"],
+        select {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        #imagePreview {
+            display: none;
+            max-width: 40%;
+            /* Ensure it doesn't exceed the form width */
+            /* Reduced height for better alignment */
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            object-fit: contain;
+        }
+
+        .buttons {
+            margin-top: 10px;
+            text-align: right;
+        }
+
+        .buttons button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .buttons button:hover {
+            background-color: #218838;
+        }
+
+        #properties {
+            margin-top: 20px;
+        }
+
+        .property {
+            background-color: #fff;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            /* Reduced the width of each property box */
+            margin: 0 auto;
+            /* Center align the property boxes */
+        }
+
+        .property img {
+            max-width: 100%;
+            /* Make sure the image fits within the box */
+            max-height: 100px;
+            /* Reduced the height for compact display */
+            border-radius: 4px;
+            margin-bottom: 10px;
+            object-fit: cover;
+        }
+
+        .property h3 {
+            margin: 0 0 10px 0;
+        }
+
+        .property p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .property .buttons {
+            text-align: right;
+        }
+
+        .property .buttons button {
+            margin-right: 10px;
+            background-color: #007bff;
+        }
+
+        .property .buttons button:hover {
+            background-color: #0056b3;
+        }
+
+        .property .delete-button {
+            background-color: #dc3545;
+        }
+
+        .property .delete-button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>ADD YOUR PROPERTY:</h1>
+
+    <form id="propertyForm">
+        <input type="text" placeholder="Title" id="title">
+        <input type="number" placeholder="Price" id="price">
+        <input type="text" placeholder="Description" id="description">
+        <input type="text" placeholder="Location" id="location">
+        <input type="number" placeholder="Bedrooms" id="bedrooms">
+        <input type="number" placeholder="Bathrooms" id="bathrooms">
+        <select id="propertyType">
+            <option value="apartment">Apartment</option>
+            <option value="house">House</option>
+            <option value="villa">Villa</option>
+        </select>
+        <input type="file" id="imageInput" accept="image/*">
+        <img id="imagePreview" alt="Property Image Preview">
+        <div class="buttons">
+            <button type="button" class="add-property-btn" onclick="addProperty()">Add Property</button>
+        </div>
+    </form>
+
+    <div id="properties"></div>
+
+    <script>
+        document.getElementById('imageInput').addEventListener('change', function () {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const preview = document.getElementById('imagePreview');
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                document.getElementById('imagePreview').style.display = 'none';
+            }
+        });
+
+        function refreshData() {
+            fetch('http://localhost:5007/api/realestate', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('properties').innerHTML = '';
+                    data.forEach((element) => {
+                        const { _id, title, price, description, location, image, bedrooms, bathrooms, propertyType } = element;
+                        const propertyHTML = `
+                        <div id="${_id}" class="property">
+                            <img src="http://localhost:5007/uploads/property/${image}" alt="${title}">
+                            <h3>${title}</h3>
+                            <p>Price: $${price}</p>
+                            <p>${description}</p>
+                            <p>Location: ${location}</p>
+                            <p>Bedrooms: ${bedrooms}</p>
+                            <p>Bathrooms: ${bathrooms}</p>
+                            <p>Property Type: ${propertyType}</p>
+                            <div class="buttons">
+                                <button class="delete-button" onclick="deleteProperty('${_id}')">Delete</button>
+                                <button class="edit-button" onclick="editProperty('${_id}')">Edit</button>
+                            </div>
+                        </div>
+                    `;
+                        document.getElementById('properties').insertAdjacentHTML('beforeend', propertyHTML);
+                    });
+                })
+                .catch(error => console.error('Error fetching properties:', error));
+        }
+
+        function addProperty() {
+            const title = document.getElementById('title').value;
+            const price = document.getElementById('price').value;
+            const description = document.getElementById('description').value;
+            const location = document.getElementById('location').value;
+            const bedrooms = document.getElementById('bedrooms').value;
+            const bathrooms = document.getElementById('bathrooms').value;
+            const propertyType = document.getElementById('propertyType').value;
+            const imageFile = document.getElementById('imageInput').files[0];
+            const formData = new FormData();
+
+            formData.append('title', title);
+            formData.append('price', price);
+            formData.append('description', description);
+            formData.append('location', location);
+            formData.append('bedrooms', bedrooms);
+            formData.append('bathrooms', bathrooms);
+            formData.append('propertyType', propertyType);
+            if (imageFile) {
+                formData.append('image', imageFile);
+            }
+
+            fetch('http://localhost:5007/api/realestate', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(() => {
+                    refreshData();
+                    document.getElementById('propertyForm').reset();
+                    document.getElementById('imagePreview').style.display = 'none';
+                })
+                .catch(error => console.error('Error adding property:', error));
+        }
+
+        function deleteProperty(id) {
+            fetch(`http://localhost:5007/api/realestate/${id}`, {
+                method: 'DELETE',
+            })
+                .then(() => refreshData())
+                .catch(error => console.error('Error deleting property:', error));
+        }
+
+        function editProperty(id) {
+            fetch(`http://localhost:5007/api/realestate/${id}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const { title, price, description, location, bedrooms, bathrooms, propertyType, image } = data;
+                    document.getElementById('title').value = title;
+                    document.getElementById('price').value = price;
+                    document.getElementById('description').value = description;
+                    document.getElementById('location').value = location;
+                    document.getElementById('bedrooms').value = bedrooms;
+                    document.getElementById('bathrooms').value = bathrooms;
+                    document.getElementById('propertyType').value = propertyType;
+
+                    if (image) {
+                        document.getElementById('imagePreview').src = `http://localhost:5007/uploads/property/${image}`;
+                        document.getElementById('imagePreview').style.display = 'block';
+                    } else {
+                        document.getElementById('imagePreview').style.display = 'none';
+                    }
+
+                    const button = document.querySelector('.buttons button');
+                    button.innerText = 'Update Property';
+                    button.onclick = function () {
+                        updateProperty(id);
+                    };
+                })
+                .catch(error => console.error('Error fetching property for edit:', error));
+        }
+
+        function updateProperty(id) {
+
+            console.log('updateProperty', id);
+
+            const title = document.getElementById('title').value;
+            const price = document.getElementById('price').value;
+            const description = document.getElementById('description').value;
+            const location = document.getElementById('location').value;
+            const bedrooms = document.getElementById('bedrooms').value;
+            const bathrooms = document.getElementById('bathrooms').value;
+            const propertyType = document.getElementById('propertyType').value;
+            const imageFile = document.getElementById('imageInput').files[0];
+            const formData = new FormData();
+
+            formData.append('title', title);
+            formData.append('price', price);
+            formData.append('description', description);
+            formData.append('location', location);
+            formData.append('bedrooms', bedrooms);
+            formData.append('bathrooms', bathrooms);
+            formData.append('propertyType', propertyType);
+            if (imageFile) {
+                formData.append('image', imageFile);
+            }
+
+            fetch(`/api/realestate/${id}`, {
+                method: 'PUT',
+                body: formData
+            })
+                .then(() => {
+                    refreshData();
+                    const button = document.querySelector('.buttons button');
+                    button.innerText = 'Add Property';
+                    button.onclick = addProperty;
+
+                    document.getElementById('propertyForm').reset();
+                    document.getElementById('imagePreview').style.display = 'none';
+                })
+                .catch(error => console.error('Error updating property:', error));
+        }
+
+        window.onload = refreshData;
+    </script>
+
+
+</body>
+
+</html>

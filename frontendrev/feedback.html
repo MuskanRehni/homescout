@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background-image: url('white.jpeg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      width: 100%;
+      height: 100%;
+    }
+
+    label {
+      color: white;
+    }
+
+    .container {
+      background-color: rgba(101, 97, 97, 0.8);
+      border: 4px solid rgb(91, 91, 201);
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      background-color: lightblue;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container mt-5 col-5">
+    <h2 class="text-primary">Feedback Form</h2>
+    <form novalidate>
+      <div class="mb-3">
+        <label for="name" class="form-label">Your Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter your name">
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email Address</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter your email">
+      </div>
+      <div class="mb-3">
+        <label for="feedback" class="form-label">Your Feedback or Suggestions</label>
+        <textarea class="form-control" id="feedback" rows="5" placeholder="Write your feedback here..."></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" id="but">Submit Feedback</button>
+    </form>
+  </div>
+
+  <script>
+    // Add event listener to the button
+    document.getElementById("but").addEventListener("click", function (event) {
+      event.preventDefault(); // Prevent form submission
+
+      // Fetch input values
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const feedback = document.getElementById("feedback").value.trim();
+
+      // Validate inputs
+      if (!name || !email || !feedback) {
+        alert("Please fill in all fields.");
+        return;
+      }
+
+      // Send data to the server
+      fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, feedback }),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Failed to submit feedback. Server responded with status " + response.status);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          if (data.success) {
+            alert(data.message);
+            document.getElementById("name").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("feedback").value = "";
+          } else {
+            alert("Error: " + data.message);
+          }
+        })
+        .catch((error) => {
+          console.error("Error during feedback submission:", error);
+          alert("An error occurred while submitting feedback. Please try again later.");
+        });
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Protected Page</title>
+</head>
+<body>
+  <h1>Protected Page</h1>
+  <p id="message">Loading...</p>
+
+  <script>
+    async function fetchProtectedData() {
+      // Get the token from cookies
+      const token = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+      
+      if (!token) {
+        alert("You need to log in first!");
+        window.location.href = "/Login.html";
+        return;
+      }
+
+      try {
+        const response = await fetch("/protected", {
+          method: "GET",
+          headers: {
+            "Authorization": `Bearer ${token}` // Correct Bearer token format
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.text();
+          document.getElementById("message").textContent = data;
+        } else {
+          alert("Access denied! Please log in again.");
+          document.cookie = "token=; Max-Age=-99999999;"; // Clear the token cookie
+          window.location.href = "/Login.html";
+        }
+      } catch (error) {
+        console.error("Error fetching protected data:", error);
+      }
+    }
+
+    fetchProtectedData();
+  </script>
+</body>
+</html>

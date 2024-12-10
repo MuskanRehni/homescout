@@ -1,0 +1,174 @@
+body {
+    background-color: #d5f3fe;
+}
+
+section {
+    width: 100%;
+}
+
+h1 {
+    color: white;
+}
+img:hover
+{
+    opacity:0.5;
+}
+
+/* Main Container */
+.main-container-services {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+/* Navbar CSS */
+.navbar-container-services {
+    width: 20%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 15px;
+}
+
+.navbar-container-services > h1 {
+    color: black;
+}
+.nav-link:hover
+{
+    color:rgb(79, 79, 237);
+}
+
+#muskan {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+/* Section Services CSS */
+.section-services {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sub-section-services {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+    gap: 25px;
+}
+
+.sub-section-services > h1 {
+    color: rgb(94, 92, 92);
+}
+.requirements
+{
+    font-size:20px;
+}
+.people
+{
+    display:flex;
+    gap:30px;
+}
+.im{
+    border-radius:50%;
+}
+.subpeople {
+    display: flex;                
+    flex-direction: column;        
+    align-items: center;           
+    text-align: center;            
+  }
+
+.upper {
+    display: flex;
+    height: 35vh;
+    background-image: url("newimage.avif");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 30%;
+    filter: blur(5px);
+    width: 100%;
+    opacity: 0.8;
+}
+
+.text-overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sofadi-one-regular {
+    font-family: "Sofadi One", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.vikram {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#id {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.head {
+    font-size: 2em;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    overflow: hidden; /* Ensures the text is hidden initially */
+    white-space: nowrap; /* Prevents wrapping */
+    animation: typing 4s 1s forwards, blink-caret 2s step-end infinite;
+}
+
+@keyframes typing {
+    from {
+        width: 0; /* Start width at 0% */
+    }
+    to {
+        width: 100%; /* Expand width to 100% */
+    }
+}
+
+@keyframes blink-caret {
+    50% {
+        border-color: transparent;
+    }
+    100% {
+        border-color: black;
+    }
+}
+
+.navbar-nav {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+}
+
+.nav-item {
+    margin-bottom: 10px; /* Add space between nav items */
+}
+
+.nav-link {
+    font-size: 16px;
+}
+#feedback{
+    display: flex;                
+    flex-direction: column;        
+    align-items: center;           
+    text-align: center;
+}
+#muskan{
+    height:40px;
+    width:250px;
+}

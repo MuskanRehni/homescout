@@ -1,0 +1,162 @@
+[
+  {
+    "title": "asdfas",
+    "price": "231423",
+    "description": "afsdfa",
+    "location": "asdfasd",
+    "imageUrl": "whitehouse.jpg",
+    "propertyId": "property_1725295060657"
+  },
+  {
+    "title": "asdfasdf",
+    "price": "2134123",
+    "description": "asdfa",
+    "location": "asdfsd",
+    "imageUrl": "blob:http://localhost:5000/1eb293c3-0746-46c7-82ba-dc41d2367c34",
+    "propertyId": "property_1725295072548"
+  },
+  {
+    "title": "hiuhiu",
+    "price": "777777",
+    "description": "gigig",
+    "location": "ubibi",
+    "imageUrl": "blob:http://localhost:5000/e361f1fb-1d9a-435f-8f12-1955810c4839",
+    "propertyId": "property_1725298983013"
+  },
+  {
+    "title": "",
+    "price": "",
+    "description": "",
+    "location": "",
+    "imageUrl": "",
+    "propertyId": "property_1725298985426"
+  },
+  {
+    "title": "",
+    "price": "",
+    "description": "",
+    "location": "",
+    "imageUrl": "",
+    "propertyId": "property_1725298986931"
+  },
+  {
+    "title": "",
+    "price": "",
+    "description": "",
+    "location": "",
+    "imageUrl": "",
+    "propertyId": "property_1725298987093"
+  },
+  {
+    "title": "",
+    "price": "",
+    "description": "",
+    "location": "",
+    "imageUrl": "",
+    "propertyId": "property_1725298987409"
+  },
+  {
+    "title": "",
+    "price": "",
+    "description": "",
+    "location": "",
+    "imageUrl": "",
+    "propertyId": "property_1725298987725"
+  },
+  {
+    "title": "",
+    "price": "",
+    "description": "",
+    "location": "",
+    "imageUrl": "",
+    "propertyId": "property_1725298987945"
+  },
+  {
+    "title": "muskan",
+    "price": "77777",
+    "description": "huoigo",
+    "location": "khbobuo",
+    "imageUrl": "blob:http://localhost:5000/b21ae26d-df41-4540-a3f5-9337cc1ac6c0",
+    "propertyId": "property_1725299014074"
+  },
+  {
+    "title": "huihu",
+    "price": "87899",
+    "description": "jkhkjk",
+    "location": "giygi",
+    "imageUrl": "blob:http://localhost:5000/0c501349-6fbb-49f6-a7f0-3c56ac8a3b0c",
+    "propertyId": "property_1725299065722"
+  },
+  {
+    "title": "hgigihi",
+    "price": "777777",
+    "description": "hkhuoh",
+    "location": "hiig",
+    "imageUrl": "blob:http://localhost:5000/70b57363-4a69-4753-bd0b-7bef11b94bc5",
+    "propertyId": "property_1725299310804"
+  },
+  {
+    "title": "vikram",
+    "price": "57888",
+    "description": "hello",
+    "location": "rajpura",
+    "imageUrl": "blob:http://localhost:5000/4ade4611-6a08-4efe-8dac-d31969cf306a",
+    "propertyId": "property_1725338131946"
+  },
+  {
+    "title": "",
+    "price": "",
+    "description": "",
+    "location": "",
+    "imageUrl": "",
+    "propertyId": "property_1725338326882"
+  },
+  {
+    "title": "",
+    "price": "",
+    "description": "",
+    "location": "",
+    "imageUrl": "blob:http://localhost:5000/09cbab4d-f824-427d-85f5-72adc76457ce",
+    "propertyId": "property_1725338339772"
+  },
+  {
+    "title": "",
+    "price": "",
+    "description": "",
+    "location": "",
+    "imageUrl": "blob:http://localhost:5000/a17f95ee-b1fc-4a4e-aab3-ba5c4fe8e053",
+    "propertyId": "property_1725338487755"
+  },
+  {
+    "title": "",
+    "price": "",
+    "description": "",
+    "location": "",
+    "imageUrl": "blob:http://localhost:5000/5cbc9522-4ebe-45c3-99e4-1ddcc642c71b",
+    "propertyId": "property_1725338669615"
+  },
+  {
+    "title": "",
+    "price": "",
+    "description": "",
+    "location": "",
+    "imageUrl": "",
+    "propertyId": "property_1725339541302"
+  },
+  {
+    "title": "",
+    "price": "",
+    "description": "",
+    "location": "",
+    "imageUrl": "blob:http://localhost:5000/440cf82c-acb7-488c-b966-0fccceeed111",
+    "propertyId": "property_1725339561674"
+  },
+  {
+    "title": "rakesh",
+    "price": "1222",
+    "description": "2bhk",
+    "location": "patiala",
+    "imageUrl": "blob:http://localhost:5000/dda3d309-70eb-40bc-a93d-9604a6cedf4d",
+    "propertyId": "property_1725339910695"
+  }
+]

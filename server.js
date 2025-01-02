@@ -55,15 +55,15 @@ app.post("/create-order", async (req, res) => {
 });
 
 // Route to serve login page
-app.get("/login", (req, res) => {
+app.get("/login", (req, res) => { // agr user already login hai then redirect krdo usse 
     if (req.cookies.token) {
         return res.redirect("/");
     }
 
-    res.sendFile(path.join(__dirname, "public", "Login.html"));
+    res.sendFile(path.join(__dirname, "public", "Login.html")); // agr nhi hai then login.html dikhayege
 });
 
-app.get("/verified", (req, res) => {
+app.get("/verified", (req, res) => { // yh route check krta hai ki user login hai ya nhi agr hai cookie m then true else false is s login confirm hota hai
     if (req.cookies.token) {
         res.status(200).send({ message: true });
     } else {
@@ -73,15 +73,15 @@ app.get("/verified", (req, res) => {
 
 // Login route
 app.post("/login", async (req, res) => {
-    const errors = validationResult(req);
+    const errors = validationResult(req); // yh req object ko validation k liye check krta hai
     if (!errors.isEmpty()) {
-        return res.status(400).send({ error: "Invalid email or password" });
+        return res.status(400).send({ error: "Invalid email or password" }); // agr errors honge toh yh line run hogi
     }
 
     const { email, password } = req.body;
 
     try {
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ email }); // yh mongodb m single document find krta hai jo match kre specific condition yh check krega ki jo email dali hai vo match kre iske sath 
         if (!user) {
             return res.status(400).send({
                 error: "User not found, please sign up first.",
